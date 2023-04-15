@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>image uploader api test</title>
+    <style>
+        input,textarea,button{display:block;}
+        textarea{width:400px;
+        height: 400px;}
+        img{width: 50%;}
+    </style>
+</head>
+<body>
+    <input type="file" id="file">
+    <button onclick="getImage()">Get Image</button>
+    <textarea id="area" readonly></textarea>
+    <img src="" id="viewer">
+</body>
+<script>
+    function getImage(){
+        const uploader = document.getElementById('file');
+        const file = uploader.files[0];
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            const base64Text = event.currentTarget.result;
+            let target = document.getElementById('area');
+            target.value = base64Text;
+            let viewer = document.getElementById('viewer');
+            viewer.src = base64Text;
+            return base64Text;
+        };
+        reader.readAsDataURL(file);
+    }
+    function main(){
+
+    }
+</script>
+</html>
